@@ -187,9 +187,6 @@ EKSWebAppDeployment/
 ├── Makefile                     # Automation: deploy, destroy, prereqs, kubeconfig, secret, etc.
 ├── README.md                    # Full documentation & setup guide
 │
-├── charts/                      # (Optional) Helm charts – placeholder for future enhancements
-│   └── dummy-chart/
-│
 ├── diagrams/
 │   └── architecture.mmd         # Mermaid architecture diagram for EKS deployment
 │
