@@ -1,0 +1,41 @@
+apiVersion: eksctl.io/v1alpha5
+kind: ClusterConfig
+
+metadata:
+  name: EKSWEBDEPLOY
+  region: ap-south-1
+  version: "1.29"
+
+availabilityZones:
+  - ap-south-1a
+  - ap-south-1b
+  - ap-south-1c
+
+iam:
+  withOIDC: true
+
+vpc:
+  cidr: "10.0.0.0/16"
+
+managedNodeGroups:
+  - name: webapp-ng
+    instanceType: t3.medium
+    desiredCapacity: 2
+    minSize: 2
+    maxSize: 5
+    privateNetworking: true
+    volumeSize: 20
+    ssh:
+      enableSsm: true
+    iam:
+      withAddonPolicies:
+        autoScaler: true
+    labels:
+      role: worker
+    tags:
+      k8s.io/cluster-autoscaler/enabled: "true"
+      k8s.io/cluster-autoscaler/EKSWEBDEPLOY: "owned"
+
+cloudWatch:
+  clusterLogging:
+    enableTypes: ["api", "audit", "authenticator", "controllerManager", "scheduler"]

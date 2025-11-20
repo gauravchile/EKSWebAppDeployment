@@ -1,0 +1,24 @@
+apiVersion: eksctl.io/v1alpha5
+kind: ClusterConfig
+
+metadata:
+  name: {{CLUSTER_NAME}}
+  region: {{REGION}}
+  version: "1.28"
+
+nodeGroups:
+  - name: {{NODEGROUP_NAME}}
+    instanceType: t3.medium
+    desiredCapacity: 2
+    minSize: 2
+    maxSize: 5
+    labels:
+      role: worker
+    iam:
+      withAddonPolicies:
+        autoScaler: true
+    ssh:
+      allow: false
+    tags:
+      k8s.io/cluster-autoscaler/enabled: "true"
+      k8s.io/cluster-autoscaler/{{CLUSTER_NAME}}: "owned"

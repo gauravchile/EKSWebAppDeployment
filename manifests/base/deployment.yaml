@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: webapp
+  namespace: webapp
+  labels:
+    app: webapp
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: webapp
+  template:
+    metadata:
+      labels:
+        app: webapp
+    spec:
+      serviceAccountName: webapp-sa
+      containers:
+        - name: webapp
+          # Docker Hub image (replace with your image)
+          image: dockerhub_username/webapp:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "128Mi"
+            limits:
+              cpu: "500m"
+              memory: "512Mi"
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: 8080
+            initialDelaySeconds: 30
+            periodSeconds: 20
+          readinessProbe:
+            httpGet:
+              path: /ready
+              port: 8080
+            initialDelaySeconds: 10
+            periodSeconds: 10
