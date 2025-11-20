@@ -1,10 +1,11 @@
 graph LR
 
+  User -->|HTTP/HTTPS| ALB
+
   subgraph AWS
     ALB[ALB - Application Load Balancer]
     EKS[EKS Control Plane]
-    VPC[(VPC)]
-    
+
     subgraph PrivateSubnets
       NG1[Managed Node Group 1]
       NG2[Managed Node Group 2]
@@ -13,20 +14,23 @@ graph LR
     subgraph PublicSubnets
       ALB
     end
+
   end
 
-  User -->|HTTP/HTTPS| ALB
   ALB -->|Routes traffic| NG1
   ALB -->|Routes traffic| NG2
 
   EKS --> NG1
   EKS --> NG2
 
-  NG1 -->|Pods| WebAppPods
-  NG2 -->|Pods| WebAppPods
+  NG1 --> WebAppPods[WebApp Pods]
+  NG2 --> WebAppPods
 
-  note right of WebAppPods
-    - Web Application Pods
-    - HPA scales pods
-    - Cluster Autoscaler scales nodes
-  end
+  Notes["
+  • Web Application Pods  
+  • HPA scales pods  
+  • Cluster Autoscaler scales nodes
+  "]
+
+  WebAppPods --- Notes
+
