@@ -124,10 +124,7 @@ kubectl -n kube-system get deployment cluster-autoscaler
 ## ✅ 6. Create Docker Pull Secret (Private Image Only)
 
 ```bash
-make create-secret \
-  DOCKER_USER=myuser \
-  DOCKER_PASS=mypass \
-  DOCKER_EMAIL=me@example.com
+make create-secret DOCKER_USER=myuser DOCKER_PASS=mypass DOCKER_EMAIL=me@example.com
 ```
 
 ---
