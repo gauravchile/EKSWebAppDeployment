@@ -7,7 +7,6 @@
 ![AWS](https://img.shields.io/badge/AWS-Load%20Balancer%20Controller-FF9900?logo=amazonaws&logoColor=white)
 ![Autoscaler](https://img.shields.io/badge/K8s-Cluster%20Autoscaler-326CE5?logo=kubernetes&logoColor=white)
 ![HPA](https://img.shields.io/badge/K8s-HPA%20Enabled-326CE5?logo=kubernetes&logoColor=white)
-![CI/CD](https://img.shields.io/badge/GitHub%20Actions-CI%2FCD-2088FF?logo=github-actions&logoColor=white)
 ![License](https://img.shields.io/badge/License-MIT-green)
 ![Platform](https://img.shields.io/badge/Platform-WSL2%20%7C%20Ubuntu-blue)
 
